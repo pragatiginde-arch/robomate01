@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RoboMate | Smart Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#168cff;--deep:#0755c9;--navy:#07172e;--bg:#f4f9ff;--card:#fff;--text:#07172e;--muted:#60718a;--line:#e1edfa;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#081426;--card:#0f2340;--text:#eaf3ff;--muted:#9bb2cf;--line:#1d3a60}}
+:root[data-theme="dark"]{--bg:#081426;--card:#0f2340;--text:#eaf3ff;--muted:#9bb2cf;--line:#1d3a60}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
+a{text-decoration:none;color:inherit}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+nav{position:fixed;top:env(safe-area-inset-top,0px);width:100%;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 7%;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:22px;display:flex;align-items:center;gap:8px;letter-spacing:-.5px}
+.logo i{font-style:normal;display:grid;place-items:center;width:36px;height:36px;border-radius:11px;color:#fff;background:linear-gradient(135deg,var(--blue),var(--deep));box-shadow:0 6px 18px #168cff55}
+.logo b{color:var(--blue)}
+.links{display:flex;gap:26px;align-items:center;font-size:14px;font-weight:600}
+.links a:hover{color:var(--blue)}
+.pill{background:var(--blue);color:#fff;padding:11px 20px;border-radius:30px;transition:.25s}
+.links a.pill:hover{color:#fff;background:var(--deep);transform:translateY(-2px)}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;padding:130px 7% 60px;position:relative;overflow:hidden;background:radial-gradient(circle at 75% 45%,#168cff30,transparent 45%),linear-gradient(135deg,var(--bg),color-mix(in srgb,var(--bg) 70%,#168cff 12%))}
+.tag{display:inline-block;padding:8px 16px;border:1px solid #168cff40;border-radius:30px;background:var(--card);color:var(--blue);font-size:13px;font-weight:700;margin-bottom:22px}
+h1{font-size:clamp(42px,5.6vw,78px);line-height:1.04;letter-spacing:-3px;margin-bottom:22px}
+.grad{background:linear-gradient(90deg,#168cff,#0646b4,#53dfff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.lead{color:var(--muted);font-size:18px;max-width:520px;margin-bottom:30px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;gap:8px;align-items:center;padding:15px 26px;border-radius:14px;font-weight:700;border:1px solid var(--line);background:var(--card);transition:.25s}
+.btn.main{color:#fff;border:0;background:linear-gradient(135deg,var(--blue),var(--deep));box-shadow:0 12px 28px #168cff45}
+.btn:hover{transform:translateY(-3px)}
+.stats{display:flex;gap:34px;margin-top:38px;flex-wrap:wrap}
+.stats div{font-size:13px;color:var(--muted)}
+.stats strong{display:block;font-size:24px;color:var(--text)}
+.stage{position:relative;height:min(620px,70vh);min-height:420px}
+.stage canvas{width:100%!important;height:100%!important;display:block;cursor:grab}
+.chip{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;font-size:12px;box-shadow:0 14px 34px #0a4b8a20;animation:bob 4s ease-in-out infinite;pointer-events:none}
+.chip b{display:block;color:var(--blue);font-size:14px}
+.c1{left:2%;top:14%}.c2{right:2%;bottom:16%;animation-delay:1.2s}.c3{right:6%;top:8%;animation-delay:2.2s}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.strip{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;padding:26px 7%;background:var(--card);border-block:1px solid var(--line);font-weight:700;font-size:14px;color:var(--muted)}
+.strip span{color:var(--blue);margin-right:8px}
+section.sec{padding:100px 7%}
+.head{text-align:center;max-width:680px;margin:0 auto 54px}
+.head small{color:var(--blue);font-weight:800;letter-spacing:2px}
+.head h2{font-size:clamp(30px,4vw,48px);letter-spacing:-1.5px;line-height:1.1;margin:14px 0}
+.head p{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;perspective:1200px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px 26px;transition:transform .15s,box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+.card:hover{box-shadow:0 28px 50px #0a4b8a22;border-color:#168cff66}
+.ico{width:62px;height:62px;display:grid;place-items:center;font-size:30px;border-radius:18px;margin-bottom:22px;background:linear-gradient(145deg,#e5f3ff,#b9dcff);box-shadow:6px 8px 16px #168cff30,-4px -4px 10px #fff;transform:translateZ(40px)}
+.card h3{font-size:19px;margin-bottom:8px;transform:translateZ(25px)}
+.card p{color:var(--muted);font-size:14px}
+.dark{background:linear-gradient(135deg,#07172e,#0c2b4e);color:#fff}
+.dark .head{text-align:left;margin:0 0 30px}.dark .head p{color:#a8bfd9}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.ben{display:flex;gap:14px;margin-bottom:20px}
+.ben i{font-style:normal;flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#54dfff;background:#168cff30;border:1px solid #168cff80}
+.ben h3{font-size:17px}.ben p{font-size:14px;color:#9cb4cf}
+.panel{border:1px solid #ffffff22;border-radius:28px;background:#ffffff0d;padding:14px}
+.panel .stage{height:380px;min-height:0}
+.dash{margin-top:12px;background:#102743;border:1px solid #294d70;border-radius:18px;padding:6px 20px}
+.dash div{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #ffffff12;font-size:14px;color:#aac0d9}
+.dash div:last-child{border:0}.dash b{color:#62d9ff}
+.hint{text-align:center;font-size:12px;color:#8ca8c7;margin:8px 0 2px}
+.voice{background:color-mix(in srgb,var(--bg) 85%,#168cff 10%);text-align:center}
+.vbox{max-width:720px;margin:auto;background:var(--card);border:1px solid var(--line);border-radius:30px;padding:46px 26px;box-shadow:0 22px 55px #0a4b8a14}
+.mic{width:88px;height:88px;border-radius:50%;border:0;color:#fff;font-size:34px;background:linear-gradient(145deg,var(--blue),var(--deep));box-shadow:0 0 0 12px #168cff18,0 10px 26px #168cff55;transition:.3s}
+.mic:hover{transform:scale(1.07)}.mic.on{animation:mp 1s infinite}
+@keyframes mp{50%{box-shadow:0 0 0 24px #168cff14,0 10px 36px #168cff80}}
+.vbox h3{font-size:25px;margin:26px 0 8px}.vbox p{color:var(--muted)}
+#vs{min-height:26px;margin-top:16px;color:var(--blue);font-weight:700}
+.cmds{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.cmds span{padding:9px 15px;border:1px solid var(--line);border-radius:20px;font-size:12px;color:var(--muted)}
+.cta{padding:80px 7%}
+.ctab{max-width:1080px;margin:auto;text-align:center;color:#fff;padding:64px 30px;border-radius:32px;background:radial-gradient(circle at 80% 0,#63c9ff55,transparent 40%),linear-gradient(135deg,#0877ed,#082c70);box-shadow:0 26px 56px #0755c935}
+.ctab h2{font-size:clamp(28px,4vw,46px);margin-bottom:14px;letter-spacing:-1px}
+.ctab p{color:#d8eaff;margin-bottom:26px}
+.ctab .btn{background:#fff;color:#0755c9;border:0}
+footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;padding:28px 7%;background:#061326;color:#8ea4bf;font-size:13px;align-items:center}
+footer .logo{color:#fff}
+@media(max-width:950px){.hero,.two{grid-template-columns:1fr}.hero{text-align:center}.hero p.lead{margin-inline:auto}.row,.stats{justify-content:center}.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.links a:not(.pill){display:none}.grid{grid-template-columns:1fr}.hero{padding-top:110px}h1{letter-spacing:-1.5px}section.sec{padding:70px 6%}footer{justify-content:center;text-align:center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#home" class="logo"><i>R</i>Robo<b>Mate</b></a>
+  <div class="links">
+    <a href="#features">Features</a><a href="#living">Smart Living</a><a href="#voice">Voice AI</a>
+    <a href="#contact" class="pill">Explore RoboMate</a>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div>
+    <div class="tag">The future of smart living</div>
+    <h1>Meet your smartest <span class="grad">companion.</span></h1>
+    <p class="lead">RoboMate is a friendly home assistant concept with voice control, reminders, lightweight item carrying and care support for everyday life.</p>
+    <div class="row">
+      <a href="#features" class="btn main">Discover RoboMate →</a>
+      <a href="#voice" class="btn">🎙 Try Voice AI</a>
+    </div>
+    <div class="stats">
+      <div><strong>Voice</strong>Hands-free control</div>
+      <div><strong>Care</strong>Reminders &amp; support</div>
+      <div><strong>Carry</strong>Built-in shelves</div>
+    </div>
+  </div>
+  <div class="stage" id="stage1">
+    <div class="chip c1"><b>AI powered</b>Smart assistance</div>
+    <div class="chip c3"><b>Always ready</b>Your daily companion</div>
+    <div class="chip c2"><b>Smart living</b>Made simple</div>
+  </div>
+</header>
+
+<div class="strip">
+  <div><span>✧</span>Intelligent assistance</div><div><span>⌘</span>Voice interaction</div>
+  <div><span>♡</span>Elderly care support</div><div><span>⚡</span>Rechargeable design</div>
+</div>
+
+<section class="sec" id="features">
+  <div class="head"><small>FEATURES</small><h2>One robot. <span class="grad">Endless possibilities.</span></h2>
+    <p>Smart technology in a friendly design that supports daily activities and makes the home more convenient.</p></div>
+  <div class="grid">
+    <article class="card"><div class="ico">🤖</div><h3>AI-powered assistant</h3><p>Helps with everyday questions, reminders and useful information through intelligent software.</p></article>
+    <article class="card"><div class="ico">🎙️</div><h3>Voice control</h3><p>Speak naturally to request information and use supported robot functions.</p></article>
+    <article class="card"><div class="ico">🧭</div><h3>Smart navigation</h3><p>A planned navigation system to move around indoor spaces and avoid detected obstacles.</p></article>
+    <article class="card"><div class="ico">📱</div><h3>Interactive touchscreen</h3><p>A proposed touchscreen for reminders, time, schedules and quick information.</p></article>
+    <article class="card"><div class="ico">🧺</div><h3>Smart storage shelves</h3><p>Shelves that carry lightweight everyday items from one indoor location to another.</p></article>
+    <article class="card"><div class="ico">🔋</div><h3>Rechargeable battery</h3><p>A planned rechargeable power system for use without a permanently attached cable.</p></article>
+  </div>
+</section>
+
+<section class="sec dark" id="living">
+  <div class="two">
+    <div>
+      <div class="head"><small style="color:#54dfff">DESIGNED AROUND YOU</small><h2>A better tomorrow starts at home.</h2>
+        <p>Built around comfort, convenience and assistance for people with different daily needs.</p></div>
+      <div class="ben"><i>✓</i><div><h3>Home assistance</h3><p>Supports simple routines, reminders and moving small household items.</p></div></div>
+      <div class="ben"><i>✓</i><div><h3>Elderly care support</h3><p>Offers reminders, friendly interaction and an easy way to request help.</p></div></div>
+      <div class="ben"><i>✓</i><div><h3>Connected smart living</h3><p>Brings voice, digital information and future smart-home integration together.</p></div></div>
+      <div class="ben"><i>✓</i><div><h3>Simple experience</h3><p>Clear, friendly controls that are easy to understand.</p></div></div>
+    </div>
+    <div class="panel">
+      <div class="stage" id="stage2"></div>
+      <p class="hint">Drag to rotate the robot in 3D</p>
+      <div class="dash">
+        <div><span>🤖 Assistant mode</span><b>Ready</b></div>
+        <div><span>🎙️ Voice interface</span><b>Available</b></div>
+        <div><span>🧭 Navigation</span><b>Concept</b></div>
+        <div><span>🔋 Battery system</span><b>Rechargeable</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec voice" id="voice">
+  <div class="head"><small>INTERACTIVE DEMO</small><h2>Just say hello to <span class="grad">RoboMate.</span></h2>
+    <p>Try your browser's voice recognition to see how a simple voice interface could work.</p></div>
+  <div class="vbox">
+    <button class="mic" id="mic" type="button" aria-label="Start voice recognition">🎙</button>
+    <h3>Talk to RoboMate</h3>
+    <p>Tap the microphone and try a command. Microphone access needs HTTPS.</p>
+    <div id="vs" aria-live="polite">Ready to listen when you are.</div>
+    <div class="cmds"><span>"Hello RoboMate"</span><span>"What time is it?"</span><span>"Tell me a joke"</span><span>"Help me"</span></div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="ctab"><h2>The future is friendlier with RoboMate.</h2>
+    <p>Smart assistance. Thoughtful design. A home where technology feels more human.</p>
+    <a href="#home" class="btn">Back to top ↑</a></div>
+</section>
+
+<footer>
+  <div class="logo"><i>R</i>Robo<b>Mate</b></div>
+  <p>© <span id="yr"></span> RoboMate. Your smart companion for a better tomorrow.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ---------- 3D ROBOT ---------- */
+function makeRobot(el,opts){
+  const w=()=>el.clientWidth,h=()=>el.clientHeight;
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(36,w()/h(),.1,100);cam.position.set(0,.6,9.5);
+  let ren;
+  try{ren=new THREE.WebGLRenderer({antialias:true,alpha:true});}catch(e){return;}
+  ren.setPixelRatio(Math.min(devicePixelRatio,2));ren.setSize(w(),h());
+  el.insertBefore(ren.domElement,el.firstChild);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x7ab4ee,.9));
+  const key=new THREE.DirectionalLight(0xffffff,.9);key.position.set(4,6,6);scene.add(key);
+  const rim=new THREE.PointLight(0x53dfff,1.2,20);rim.position.set(-4,2,-3);scene.add(rim);
+
+  const white=new THREE.MeshStandardMaterial({color:0xf2f8ff,roughness:.28,metalness:.15});
+  const silver=new THREE.MeshStandardMaterial({color:0xb9d6f4,roughness:.35,metalness:.4});
+  const dark=new THREE.MeshStandardMaterial({color:0x07182d,roughness:.2,metalness:.5});
+  const glow=new THREE.MeshBasicMaterial({color:0x53dfff});
+  const R=new THREE.Group();scene.add(R);
+  const add=(g,m,x,y,z,p)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);p.add(o);return o};
+
+  const body=add(new THREE.CylinderGeometry(1.15,1.0,2,40),white,0,-.2,0,R);body.scale.z=.8;
+  add(new THREE.SphereGeometry(1.15,40,20,0,6.3,0,1.57),white,0,.8,0,R).scale.z=.8;
+  const panel=add(new THREE.BoxGeometry(1.3,.8,.1),dark,0,.35,.9,R);
+  add(new THREE.BoxGeometry(.5,.07,.02),glow,0,.35,.96,R);
+  [-.3,0,.3].forEach(x=>add(new THREE.SphereGeometry(.05,12,12),glow,x,.1,.96,R));
+  const shelf=add(new THREE.BoxGeometry(1.6,.8,.5),silver,0,-.85,.55,R);
+  [-.15,-.4,-.65].forEach(y=>add(new THREE.BoxGeometry(1.5,.05,.45),white,0,y-.45,.6,R));
+  add(new THREE.CylinderGeometry(.22,.26,.3,24),silver,0,1.05,0,R);
+
+  const head=new THREE.Group();head.position.set(0,1.95,0);R.add(head);
+  add(new THREE.SphereGeometry(1.05,48,32),white,0,.3,0,head).scale.set(1.08,.82,.9);
+  const face=add(new THREE.SphereGeometry(.88,40,24),dark,0,.3,.27,head);face.scale.set(1.08,.72,.72);
+  const eyes=[-.38,.38].map(x=>add(new THREE.SphereGeometry(.13,20,20),glow,x,.38,.9,head));
+  eyes.forEach(e=>e.scale.y=1.4);
+  const mouth=add(new THREE.TorusGeometry(.2,.03,8,24,Math.PI),glow,0,.08,.9,head);mouth.rotation.z=Math.PI;
+  [-1,1].forEach(s=>add(new THREE.CylinderGeometry(.14,.14,.4,20),silver,s*1.17,.3,0,head).rotation.z=1.57);
+  add(new THREE.CylinderGeometry(.02,.02,.4,8),silver,0,1.3,0,head);
+  add(new THREE.SphereGeometry(.07,12,12),glow,0,1.52,0,head);
+
+  const arms=[-1,1].map(s=>{const g=new THREE.Group();g.position.set(s*1.38,.7,0);R.add(g);
+    add(new THREE.SphereGeometry(.2,20,20),silver,0,0,0,g);
+    add(new THREE.CylinderGeometry(.14,.12,1.3,20),white,0,-.7,0,g);
+    add(new THREE.SphereGeometry(.18,20,20),silver,0,-1.4,0,g);g.rotation.z=s*.12;return g});
+
+  [-.55,.55].forEach(x=>{add(new THREE.CylinderGeometry(.14,.14,.4,16),silver,x,-1.4,0,R);
+    const wh=add(new THREE.CylinderGeometry(.42,.42,.35,32),dark,x,-1.85,0,R);wh.rotation.z=1.57;
+    const ring=add(new THREE.TorusGeometry(.42,.04,8,32),glow,x+(x<0?-.18:.18),-1.85,0,R);ring.rotation.y=1.57});
+  const sh=new THREE.Mesh(new THREE.CircleGeometry(1.5,32),new THREE.MeshBasicMaterial({color:0x1d4f80,transparent:true,opacity:.22}));
+  sh.rotation.x=-1.57;sh.position.y=-2.3;scene.add(sh);
+
+  let mx=0,my=0,drag=false,lx=0,spin=0;
+  const move=(x,y)=>{const r=el.getBoundingClientRect();mx=(x-r.left)/r.width-.5;my=(y-r.top)/r.height-.5};
+  if(opts.follow)addEventListener('pointermove',e=>move(e.clientX,e.clientY));
+  else{
+    el.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;el.setPointerCapture(e.pointerId)});
+    el.addEventListener('pointerup',()=>drag=false);
+    el.addEventListener('pointermove',e=>{if(drag){spin+=(e.clientX-lx)*.012;lx=e.clientX}});
+  }
+  addEventListener('resize',()=>{ren.setSize(w(),h());cam.aspect=w()/h();cam.updateProjectionMatrix()});
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let vis=true;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(el);
+  const clk=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);if(!vis)return;
+    const t=still?0:clk.getElapsedTime();
+    R.position.y=Math.sin(t*1.5)*.12;
+    if(opts.follow){R.rotation.y+=((mx*1.1)-R.rotation.y)*.06;R.rotation.x+=((my*.35)-R.rotation.x)*.06;head.rotation.y=mx*.5;head.rotation.x=my*.3}
+    else{if(!drag)spin+=still?0:.006;R.rotation.y=spin;head.rotation.y=Math.sin(t)*.25}
+    arms[0].rotation.x=Math.sin(t*1.5)*.08;arms[1].rotation.x=-Math.sin(t*1.5)*.08;
+    const b=(Math.sin(t*1.3)>.985)?.1:1;eyes.forEach(e=>e.scale.y=1.4*b);
+    ren.render(scene,cam)})();
+}
+if(window.THREE){makeRobot(document.getElementById('stage1'),{follow:true});makeRobot(document.getElementById('stage2'),{follow:false});}
+
+/* ---------- 3D TILT CARDS ---------- */
+document.querySelectorAll('.card').forEach(c=>{
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`rotateY(${x*14}deg) rotateX(${-y*14}deg) translateY(-6px)`});
+  c.addEventListener('pointerleave',()=>c.style.transform='');
+});
+
+/* ---------- VOICE DEMO ---------- */
+const mic=document.getElementById('mic'),vs=document.getElementById('vs');
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function speak(m){vs.textContent=m;if('speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(m);u.lang='en-IN';speechSynthesis.speak(u)}}
+function cmd(c){const t=c.toLowerCase();
+  if(t.includes('hello')||/\bhi\b/.test(t))speak('Hello! I am RoboMate, your smart companion.');
+  else if(t.includes('time'))speak('The current time is '+new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'}));
+  else if(t.includes('joke'))speak('Why did the robot go on vacation? It needed to recharge!');
+  else if(t.includes('help'))speak('I can greet you, tell you the time, and tell you a joke. Try asking me!');
+  else speak('I heard you say '+c+'. This demo supports greetings, time, jokes, and help.')}
+if(!SR){mic.addEventListener('click',()=>vs.textContent='Voice recognition is not supported in this browser. Try a recent Chrome or Edge.')}
+else{const rec=new SR();rec.lang='en-IN';rec.continuous=false;rec.interimResults=false;let on=false;
+  rec.onstart=()=>{on=true;mic.classList.add('on');mic.textContent='🔴';vs.textContent='Listening... speak now!'};
+  rec.onresult=e=>cmd(e.results[0][0].transcript);
+  rec.onerror=e=>vs.textContent=e.error==='not-allowed'?'Microphone permission was denied. Allow access in your browser settings.':'Voice recognition stopped. Please try again.';
+  rec.onend=()=>{on=false;mic.classList.remove('on');mic.textContent='🎙'};
+  mic.addEventListener('click',()=>{if(on)rec.stop();else try{rec.start()}catch(e){vs.textContent='Please wait a moment and tap again.'}})}
+</script>
+</body>
+</html>
